@@ -1,0 +1,285 @@
+/**
+ * @name Chat Bubbles
+ * @author Kaneko Qt#3682
+ * @version 3.6
+ * @description Message bubbles theme for Better Discord.
+ * @source https://github.com/qt-kaneko/Chat-Bubbles
+*/
+/* Copyright 2023 Kaneko Qt
+ * This file is part of Chat Bubbles.
+ *
+ * Chat Bubbles is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Chat Bubbles is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ * See the GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with Chat Bubbles. If not, see <https://www.gnu.org/licenses/>.
+ */
+
+/*#region Settings*/
+:root {
+  --cb-bubble-background: var(--background-secondary); /* Message bubble background */
+  --cb-bubble-corner-radius: 8px; /* Message bubble corner radius */
+
+  --cb-mentioned-indicator-width: 2px; /* Width of left indicator line in messages with mention */
+  --cb-replying-indicator-width: 2px; /* Width of left indicator line in message that you are replying */
+
+  --cb-hide-quick-action-buttons: none; /* Whether to show quick actions panel | none - hide, unset - show */
+  --cb-hide-replied-preview-avatar: none; /* Whether to show avatar in replied message preview | none - hide, unset - show */
+  --cb-hide-image-details: none; /* Whether to show image details in the end of message | none - hide, unset - show */
+}
+/*#endregion Settings*/
+
+/*#region Styles*/
+/*THIS IS THE THEME STYLES, DON'T EDIT THEM IF YOU DON'T KNOW WHAT YOU DO, THEME SETTINGS CAN BE FOUND ABOVE*/
+
+/*#region Message*/
+.message__5126c:not(.systemMessage__5126c) {
+  background: var(--cb-bubble-background);
+  
+  margin-left: 4.5rem;
+  margin-top: .125rem;
+  margin-bottom: .125rem;
+  margin-right: 48px;
+
+  width: fit-content;
+  max-width: calc(100% - 9rem);
+
+  padding: 10px !important;
+  border-radius: var(--cb-bubble-corner-radius);
+}
+
+.avatar_c19a55,
+.avatarDecoration_c19a55,
+.timestampVisibleOnHover_c19a55 { /* Fix avatar, avatar decoration, timestamp position */
+  margin-left: -4.5rem;
+}
+
+.repliedMessage_c19a55 + .contents_c19a55 > .avatar_c19a55 { /* Set avatar position near answer message */
+  margin-top: -40px;
+}
+.repliedMessage_c19a55 + .contents_c19a55 > .avatarDecoration_c19a55 { /* Set avatar decoration position near answer message */
+  margin-top: calc(-40px + -0.2rem);
+}
+/*#endregion Message*/
+
+/*#region Replied preview*/
+.repliedMessage_c19a55 {
+  padding: 2px;
+  
+  border-left: 2px solid;
+  border-radius: 2px;
+  padding-left: 6px;
+}
+
+.repliedMessage_c19a55::before { /* Remove repled message "arrow" */
+  display: none;
+}
+
+.repliedMessage_c19a55 { /* Move replied text preview to next line */
+  flex-wrap: wrap;
+}
+.repliedMessage_c19a55 > .repliedTextPreview_c19a55 {
+  width: calc(100% - 24px); /* Preserve space for image thumbnail icon */
+}
+
+.repliedTextContent_c19a55 { /* Fix add ... in the end of not fitting text */
+  display: unset;
+}
+
+.replyAvatar_c19a55,
+.executedCommandAvatar_c19a55 { /* Hide reply avatar */
+  display: var(--cb-hide-replied-preview-avatar);
+}
+
+.executedCommand_c19a55 { /* Fix replied "message with command" preview height */
+  height: unset;
+}
+
+/* TODO: Somehow fix replied "message with command" preview "used /blahblah" left margin */
+
+/*#endregion Replied preview*/
+
+/*#region Mentioned*/
+.mentioned__5126c::before { /* Recreate mentioned style to have rounded corners */
+  display: none;
+}
+.mentioned__5126c {
+  border-left: var(--cb-mentioned-indicator-width) solid var(--info-warning-foreground);
+}
+
+.mentioned__5126c .avatar_c19a55 { /* Fix avatar indent when mentioned */
+  margin-left: calc(-4.5rem - var(--cb-mentioned-indicator-width));
+}
+/*#endregion Mentioned*/
+
+/*#region Replying*/
+.replying__5126c::before { /* Recreate replying style to have rounded corners */
+  display: none;
+}
+.replying__5126c {
+  border-left: var(--brand-experiment) 2px solid;
+}
+
+.replying__5126c .avatar_c19a55 { /* Fix avatar indent when replying */
+  margin-left: calc(-4.5rem - var(--cb-replying-indicator-width));
+}
+/*#endregion Replying*/
+
+/*#region Threads*/
+.container__9271d {
+  background: var(--background-secondary-alt);
+  width: -webkit-fill-available;
+  margin-top: unset;
+}
+
+.hasThread_c19a55::after { /* Remove thread "arrow" */
+  display: none;
+}
+/*#endregion Threads*/
+
+/*#region Reactions*/
+.reaction_f8896c { /* Add background to reactions */
+  background: var(--background-primary);
+  border-color: hsla(0,calc(var(--saturation-factor, 1)*0%),100%,.2);
+  margin-top: 5px;
+}
+.theme-light.reaction_f8896c {
+  border-color: hsla(0,calc(var(--saturation-factor, 1)*0%),0%,.2);
+}
+
+.reactions_f8896c { /* Fix reactions bottom margin */
+  margin-bottom: -1px;
+  padding-bottom: unset;
+}
+.reaction_f8896c {
+  margin-bottom: unset;
+}
+
+.reactionBtn__23977 { /* Fix add reaction button bottom margin */
+  margin-bottom: unset;
+}
+/*#endregion Reactions*/
+
+/*#region Emoji*/
+.emojiContainer__75abc {
+  width: fit-content;
+  height: fit-content;
+}
+.emoji {
+  width: 21px;
+  height: 21px;
+}
+/*#endregion Emoji*/
+
+/*#region Dividers*/
+.divider__5126c, .divider__908e2 { /* Fix dividers indents */
+  position: relative;
+  top: 0px !important;
+  margin: 17px 0px !important;
+}
+/*#endregion Dividers*/
+
+/*#region Alt-text*/
+.altText__0f481 { /* Fix alt-text indents */
+  margin: 10px 0 0 0px;
+}
+.altText__0f481:empty {
+  display: none;
+}
+/*#endregion Alt-text*/
+
+/*#region Quick-action buttons*/
+.buttonContainer_c19a55 {
+  display: var(--cb-hide-quick-action-buttons);
+}
+/*#endregion Quick-action buttons*/
+
+/*#region Embeds*/
+.container_b7e1cb { /* Add gaps between embeds */
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.reaction_f8896c { /* Fix reactions top margin */
+  margin-top: unset;
+}
+
+.reactions_f8896c { /* Fix reactions position */
+  width: 100%;
+}
+/*#endregion Embeds*/
+
+/*#region Images*/
+.imageWrapper__178ee {
+  border-radius: 4px;
+  overflow: hidden;
+}
+.imageContainer__0f481 + .altText__0f481 { /* Hide image details */
+  display: none;
+}
+
+.messageAttachment__5dae1 .imageWrapper__178ee { /* Make images same width */
+  max-width: 350px !important;
+}
+/* Removed due to cropped imaged in preview bug, idk for what it was needed
+ * .clickableWrapper__2d2ea > img {
+ *   max-width: unset !important;
+ *   max-height: unset !important;
+ * }
+ */
+.messageAttachment__5dae1 {
+  width: 100%;
+}
+/*#endregion Images*/
+
+/*#region Remove attachment buttons*/
+.imageContainer__0f481 {
+  position: relative;
+}
+.removeAttachmentButton__692b5 {
+  z-index: 1;
+
+  position: absolute;
+  top: 4px;
+  right: -4px;
+
+  background: var(--background-primary);
+  border-radius: 4px;
+  width: 24px; height: 24px;
+  box-shadow: -0.4px 0.4px 2px 0px rgba(0,0,0,0.4);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  transform: translate3d(0,-10px,0);
+  transition: all .1s ease-in-out;
+}
+/*#endregion Remove attachment buttons*/
+
+/*#endregion Styles*/
+
+
+/* Additions */
+.theme-dark #app-mount .message__5126c {
+    margin-left: 66px !important;
+    border-radius: 15px;
+    background-color: #00000054;
+}
+
+.messageListItem__5126c {
+  padding: 3px;
+}
+
+.scroller__6b0e0 {
+  backdrop-filter: blur(5px);
+}
+
